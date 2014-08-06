@@ -15,6 +15,9 @@ python setup.py install
 chmod 640 /usr/local/jumpgate/etc/*
 cp /usr/local/jumpgate/etc/* /etc/
 sed -i 's/localhost/0.0.0.0/g' /etc/identity.templates
+if [ -f /etc/identity_v3.templates ]; then
+	sed -i 's/localhost/0.0.0.0/g' /etc/identity_v3.templates
+fi
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/jumpgate.conf
 sed -i 's/identity.templates/\/etc\/identity.templates/g' /etc/jumpgate.conf
 KEY=`date +%s | sha256sum | base64 | head -c 16 ; echo`
